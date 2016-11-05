@@ -11,12 +11,12 @@ import java.math.*;
 import java.util.regex.*;
 
 public class Solution {
-    static BigInteger fib(int n)
+    static BigInteger fib(int n, BigInteger first_term, BigInteger Second_term)
     {
 
         BigInteger[] series = new BigInteger[n];
-        series[0]=BigInteger.ZERO;
-        series[1]=BigInteger.ONE;
+        series[0]=first_term;
+        series[1]=Second_term;
         int i = 0;
         for (i = 2; i < n; i++)
         {
@@ -33,9 +33,11 @@ public class Solution {
     {
         integers[i] = sc.nextInt();
     }
+        BigInteger first_term = BigInteger.valueOf(integers[0]);
+        BigInteger second_term = BigInteger.valueOf(integers[1]);
         int termToBeFound = integers[2];
         
-        System.out.println(fib(termToBeFound));
+        System.out.println(fib(termToBeFound, first_term, second_term));
         
         
     }
