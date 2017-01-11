@@ -7,33 +7,33 @@ package com.vaibhavsahu.interviews;
 *
 * */
 
+import static java.lang.Math.*;
+
 public class Main {
 
-
+//Helper Method for Cut Rod
     public static int CutRod_Aux(int[] p, int n, int [] r){
-        int cost = 0;
-        if (r[n] >= 0){
+        if(r[n]>0){
             return r[n];
         }
-        if (n == 0)
-             cost = 0;
+        int q;
+        if(n==0) q=0;
         else{
-            cost = Integer.MIN_VALUE;
-            for (int i = 1; i <= n; i++) {
-                cost = Integer.max(cost, p[i]+CutRod_Aux(p, n-i, r));
+            q=0;
+            for(int i=0;i<n;i++){
+                q=Math.max(q, p[i]+CutRod_Aux(p,n-i-1,r));
             }
-            r[n] = cost;
-
         }
-        return cost;
-
+        r[n]=q;
+        return q;
     }
+    //Memoized Cut Rod 
     public static int CutRod(int[] prices, int n){
         int[] revs = new int[n+1];
         //int profit = 0;
 
-        for (int i = 0; i <= n; i++) {
-            revs[i] = -1;
+        for (int i = 0; i < n; i++) {
+            revs[i] = 0;
         }
         return CutRod_Aux(prices, n, revs);
     }
