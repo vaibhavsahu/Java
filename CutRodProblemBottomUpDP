@@ -1,0 +1,33 @@
+package com.vaibhavsahu.interviews;
+
+
+/*
+*Author: Vaibhav Sahu
+* Problem: Cut Rod Problem(Dynamic Programming with Bottom Up Approach)
+*
+*For the bottom-up dynamic-programming approach, BOTTOM-UP-CUT-ROD
+*uses the natural ordering of the subproblems: a problem of size i is “smaller”
+*than a subproblem of size j if i < j. Thus, the procedure solves subproblems of
+*sizes j D 0; 1; : : : ; n, in that order.
+* */
+public class Main {
+
+    public static int CutRod(int[] p, int n){
+        int[] r = new int[n+1];
+        r[0] = 0;
+        int cost = 0;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                cost = Math.max(cost, p[j]+r[i-j-1]);
+            }
+            r[i] = cost;
+        }
+        return r[n];
+    }
+
+    public static void main(String[] args) {
+	// write your code here
+        int []prices = {3, 5, 8, 9, 10, 17, 17, 20};
+        System.out.println(CutRod(prices, prices.length));
+    }
+}
