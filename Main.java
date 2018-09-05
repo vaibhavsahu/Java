@@ -1,32 +1,37 @@
-package com.vaibhavsahu.BFS;
+package com.vaibhav.interview;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+
+//import io.javabrains.common.Person;
 
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        List<Person> people = Arrays.asList(
+                new Person("Charles", "Dickens", 60),
+                new Person("Lewis", "Carroll", 42),
+                new Person("Thomas", "Carlyle", 51),
+                new Person("Charlotte", "Bronte", 45),
+                new Person("Matthew", "Arnold", 39)
+        );
 
-        BreadthFirstSearch bfs = new BreadthFirstSearch();
+        // Step 1: Sort list by last name
 
-        //create vertices in the graph
+        people.sort((p1, p2) -> p1.getLastName().compareTo(p2.getLastName()));
 
-        vertex vertex1 = new vertex(1);
-        vertex vertex2 = new vertex(2);
-        vertex vertex3 = new vertex(3);
-        vertex vertex4 = new vertex(4);
-        vertex vertex5 = new vertex(5);
+        //Alternatively, use Predicate
+        Predicate<Person> predicate = p -> p.getLastName().startsWith("C");
 
-        //prepare adjacancy list of vertices
+        // Step 2: Create a method that prints all elements in the list
+        people.stream().forEach(p -> System.out.println(p));
 
-        vertex1.addNeighbor(vertex2);
-        vertex1.addNeighbor(vertex4);
-        vertex4.addNeighbor(vertex5);
-        vertex2.addNeighbor(vertex3);
+        // Step 3: Create a method that prints all people that have last name beginning with C
+        people.stream().filter(p -> p.getLastName().startsWith("C")).forEach(p -> System.out.println(p));
 
-        //run bfs on the graph
-
-        bfs.doDFS(vertex1);
-
-
+        //using predicate
+        people.stream().filter(p -> predicate.test(p)).forEach(person -> System.out.println(person));
 
     }
+
 }
